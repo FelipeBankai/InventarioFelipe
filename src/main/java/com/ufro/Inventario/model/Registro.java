@@ -3,6 +3,10 @@ package com.ufro.Inventario.model;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+/**
+ * Registro registra los productos ingresos o eliminados en el inventario.
+ * @author Felipe Fuentes
+ */
 @Entity
 public class Registro {
     @Id
@@ -31,6 +35,14 @@ public class Registro {
 
     public Registro(){}
 
+    /**
+     * Crea un registro y lo guarda en el sistema.
+     * @param fechaRegistro Fecha en la que se realizo un registro
+     * @param producto Producto Registrado
+     * @param user Usuario que ingreso el producto
+     * @param accion Accion que se realizo
+     * @param cantidad Cantidad de productos ingresados en el inventario
+     */
     public Registro(Timestamp fechaRegistro, Producto producto, User user, Accion accion, int cantidad) {
         this.fechaRegistro = fechaRegistro;
         this.producto = producto;
@@ -39,6 +51,10 @@ public class Registro {
         this.cantidad = cantidad;
     }
 
+    /**
+     * Devuelve la fecha en la que se hizo un registro
+     * @return Fecha del registro
+     */
     public Timestamp getFechaRegistro() {
         return fechaRegistro;
     }
@@ -47,6 +63,10 @@ public class Registro {
         this.fechaRegistro = fechaRegistro;
     }
 
+    /**
+     * Se obtiene el producto ingresado al inventario
+     * @return Producto
+     */
     public Producto getProducto() {
         return producto;
     }
@@ -55,6 +75,10 @@ public class Registro {
         this.producto = producto;
     }
 
+    /**
+     * Usuario que ingreso el registro al inventario
+     * @return Usuario
+     */
     public User getUser() {
         return user;
     }
@@ -63,6 +87,10 @@ public class Registro {
         this.user = user;
     }
 
+    /**
+     * Devuelve si se elimino o  agrego un producto
+     * @return accion a realizar
+     */
     public Accion getAccion() {
         return accion;
     }
@@ -71,6 +99,10 @@ public class Registro {
         this.accion = accion;
     }
 
+    /**
+     * Obtiene una cantidad de productos ingresados al sistema
+     * @return Cantidad de productos
+     */
     public int getCantidad() {
         return cantidad;
     }

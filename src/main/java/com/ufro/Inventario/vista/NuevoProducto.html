@@ -4,10 +4,10 @@
     <link rel="stylesheet" type="text/css" href="http://carrillo.perezermel.com/external-css/pure.css">
     <link rel="stylesheet" type="text/css" href="css/base.css">
     <title>Ventas e Inventario</title>
-    <script src="js/jquery.js"></script>
 </head>
 
 <body>
+<script>src="FuncionProducto.js"</script>
 <div class="pure-g-r" id="layout">
     <div class="pure-u-1" id="main">
         <div class="header">
@@ -18,11 +18,12 @@
         <div class="content">
             <h2 class="content-subhead">Creacion de productos</h2>
         </div>
-    </div>
 
+    </div>
+    <FORM name=form action="" method="post">
 
         <p>
-            Nombre del producto: <input type="text" name="nombreProducto">
+            Nombre del producto: <input type="text" name="nombreProducto" id="nombreProducto">
         </p>
         <p>
            Tipo de producto: <input type="text" name="tipoProducto">
@@ -31,12 +32,18 @@
             Cantidad del producto: <input type="text" name="cantidadProducto">
         </p>
         <p>
-            Descripcion de producto: <input type="text" name="descripcionProducto">
+            Descripcion de producto:
+        </p>
+        <p>
+
+            <textarea name="comentario" rows="5" cols="50" style="width: 502px; height: 85px;"></textarea>
+
+        </p>
+        <p>
+            <input type="button" value ="Captura" onclick=" captura()">
         </p>
 
-        <form action="InventarioVista.html">
-            <input type="submit" value="Ingresar" />
-        </form>
+    </form>
 
 
         <div class="footer pure-u-1">

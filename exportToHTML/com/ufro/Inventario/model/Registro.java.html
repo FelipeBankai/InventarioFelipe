@@ -1,0 +1,134 @@
+<html>
+<head>
+<title>Registro.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #629755; font-style: italic;}
+.s3 { color: #629755; font-weight: bold; font-style: italic;}
+.s4 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Registro.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.ufro.Inventario.model</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">javax.persistence.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.sql.Timestamp</span><span class="s0">;</span>
+
+<span class="s2">/**</span>
+ <span class="s2">* Registro registra los productos ingresos o eliminados en el inventario.</span>
+ <span class="s2">* </span><span class="s3">@author </span><span class="s2">Felipe Fuentes</span>
+ <span class="s2">*/</span>
+<span class="s1">@Entity</span>
+<span class="s0">public class </span><span class="s1">Registro {</span>
+    <span class="s1">@Id</span>
+    <span class="s1">@GeneratedValue(strategy = GenerationType.IDENTITY)</span>
+    <span class="s1">@Column(name = </span><span class="s4">&quot;id&quot;</span><span class="s0">, </span><span class="s1">nullable = </span><span class="s0">false</span><span class="s1">)</span>
+    <span class="s0">private </span><span class="s1">Long id</span><span class="s0">;</span>
+
+    <span class="s1">@Column(name = </span><span class="s4">&quot;fechaRegistro&quot;</span><span class="s1">)</span>
+    <span class="s0">private </span><span class="s1">Timestamp fechaRegistro</span><span class="s0">;</span>
+
+    <span class="s1">@ManyToOne(optional = </span><span class="s0">false</span><span class="s1">)</span>
+    <span class="s1">@JoinColumn(name = </span><span class="s4">&quot;producto&quot;</span><span class="s0">, </span><span class="s1">nullable = </span><span class="s0">false</span><span class="s1">)</span>
+    <span class="s0">private </span><span class="s1">Producto producto</span><span class="s0">;</span>
+
+    <span class="s1">@ManyToOne(optional = </span><span class="s0">false</span><span class="s1">)</span>
+    <span class="s1">@JoinColumn(name = </span><span class="s4">&quot;user&quot;</span><span class="s0">, </span><span class="s1">nullable = </span><span class="s0">false</span><span class="s1">)</span>
+    <span class="s0">private </span><span class="s1">User user</span><span class="s0">;</span>
+
+    <span class="s1">@ManyToOne(optional = </span><span class="s0">false</span><span class="s1">)</span>
+    <span class="s1">@JoinColumn(name = </span><span class="s4">&quot;accion&quot;</span><span class="s0">, </span><span class="s1">nullable = </span><span class="s0">false</span><span class="s1">)</span>
+    <span class="s0">private </span><span class="s1">Accion accion</span><span class="s0">;</span>
+
+    <span class="s1">@Column(name = </span><span class="s4">&quot;cantidad&quot;</span><span class="s0">, </span><span class="s1">nullable = </span><span class="s0">false</span><span class="s1">)</span>
+    <span class="s0">private int </span><span class="s1">cantidad</span><span class="s0">;</span>
+
+
+    <span class="s0">public </span><span class="s1">Registro(){}</span>
+
+    <span class="s2">/**</span>
+     <span class="s2">* Crea un registro y lo guarda en el sistema.</span>
+     <span class="s2">* </span><span class="s3">@param </span><span class="s2">fechaRegistro Fecha en la que se realizo un registro</span>
+     <span class="s2">* </span><span class="s3">@param </span><span class="s2">producto Producto Registrado</span>
+     <span class="s2">* </span><span class="s3">@param </span><span class="s2">user Usuario que ingreso el producto</span>
+     <span class="s2">* </span><span class="s3">@param </span><span class="s2">accion Accion que se realizo</span>
+     <span class="s2">* </span><span class="s3">@param </span><span class="s2">cantidad Cantidad de productos ingresados en el inventario</span>
+     <span class="s2">*/</span>
+    <span class="s0">public </span><span class="s1">Registro(Timestamp fechaRegistro</span><span class="s0">, </span><span class="s1">Producto producto</span><span class="s0">, </span><span class="s1">User user</span><span class="s0">, </span><span class="s1">Accion accion</span><span class="s0">, int </span><span class="s1">cantidad) {</span>
+        <span class="s0">this</span><span class="s1">.fechaRegistro = fechaRegistro</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.producto = producto</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.user = user</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.accion = accion</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.cantidad = cantidad</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">/**</span>
+     <span class="s2">* Devuelve la fecha en la que se hizo un registro</span>
+     <span class="s2">* </span><span class="s3">@return </span><span class="s2">Fecha del registro</span>
+     <span class="s2">*/</span>
+    <span class="s0">public </span><span class="s1">Timestamp getFechaRegistro() {</span>
+        <span class="s0">return </span><span class="s1">fechaRegistro</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setFechaRegistro(Timestamp fechaRegistro) {</span>
+        <span class="s0">this</span><span class="s1">.fechaRegistro = fechaRegistro</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">/**</span>
+     <span class="s2">* Se obtiene el producto ingresado al inventario</span>
+     <span class="s2">* </span><span class="s3">@return </span><span class="s2">Producto</span>
+     <span class="s2">*/</span>
+    <span class="s0">public </span><span class="s1">Producto getProducto() {</span>
+        <span class="s0">return </span><span class="s1">producto</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setProducto(Producto producto) {</span>
+        <span class="s0">this</span><span class="s1">.producto = producto</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">/**</span>
+     <span class="s2">* Usuario que ingreso el registro al inventario</span>
+     <span class="s2">* </span><span class="s3">@return </span><span class="s2">Usuario</span>
+     <span class="s2">*/</span>
+    <span class="s0">public </span><span class="s1">User getUser() {</span>
+        <span class="s0">return </span><span class="s1">user</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setUser(User user) {</span>
+        <span class="s0">this</span><span class="s1">.user = user</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">/**</span>
+     <span class="s2">* Devuelve si se elimino o  agrego un producto</span>
+     <span class="s2">* </span><span class="s3">@return </span><span class="s2">accion a realizar</span>
+     <span class="s2">*/</span>
+    <span class="s0">public </span><span class="s1">Accion getAccion() {</span>
+        <span class="s0">return </span><span class="s1">accion</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setAccion(Accion accion) {</span>
+        <span class="s0">this</span><span class="s1">.accion = accion</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">/**</span>
+     <span class="s2">* Obtiene una cantidad de productos ingresados al sistema</span>
+     <span class="s2">* </span><span class="s3">@return </span><span class="s2">Cantidad de productos</span>
+     <span class="s2">*/</span>
+    <span class="s0">public int </span><span class="s1">getCantidad() {</span>
+        <span class="s0">return </span><span class="s1">cantidad</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setCantidad(</span><span class="s0">int </span><span class="s1">cantidad) {</span>
+        <span class="s0">this</span><span class="s1">.cantidad = cantidad</span><span class="s0">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

@@ -2,6 +2,10 @@ package com.ufro.Inventario.model;
 
 import javax.persistence.*;
 
+/**
+ * Acccion representa las acciones que se haran.
+ * @author Felipe Fuentes
+ */
 @Entity
 public class Accion {
 
@@ -16,11 +20,20 @@ public class Accion {
     public Accion() {
     }
 
+    /**
+     * Crea una accion con una id y nombre de la accion
+     * @param id ID de la accion
+     * @param nombreAccion Nombre de la accion a realizar
+     */
     public Accion(Long id, String nombreAccion) {
         this.id = id;
         this.nombreAccion = nombreAccion;
     }
 
+    /**
+     * Obtiene el nombre de una opcion para especificar esta
+     * @return Nombre de una accion
+     */
     public String getNombreAccion() {
         return nombreAccion;
     }
